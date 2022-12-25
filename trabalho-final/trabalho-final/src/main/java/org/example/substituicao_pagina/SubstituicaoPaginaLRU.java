@@ -1,10 +1,22 @@
-package org.example.page_replacement;
+package org.example.substituicao_pagina;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class LRUPageReplacement {
+public class SubstituicaoPaginaLRU implements Runnable{
+
+    int paginas[];
+    int tamanho;
+
+    int quadros;
+
+    public SubstituicaoPaginaLRU(int paginas[], int tamanho, int quadros) {
+        this.paginas = paginas;
+        this.tamanho = tamanho;
+        this.quadros = quadros;
+    }
+
     public static int pageFaults(int pages[], int n, int capacity)
     {
         // To represent set of current pages. We use
@@ -79,5 +91,10 @@ public class LRUPageReplacement {
         }
 
         return page_faults;
+    }
+
+    @Override
+    public void run() {
+        System.out.println("Falhas de página utilizando substituição LRU para " + quadros + " quadros:      " + pageFaults(paginas, tamanho, quadros));
     }
 }

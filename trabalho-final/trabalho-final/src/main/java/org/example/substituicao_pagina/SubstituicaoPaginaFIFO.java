@@ -1,11 +1,23 @@
-package org.example.page_replacement;
+package org.example.substituicao_pagina;
 
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class FifoPageReplacement {
-    public static int pageFaults(int pages[], int n, int capacity)
+public class SubstituicaoPaginaFIFO implements Runnable{
+
+    int paginas[];
+    int tamanho;
+    int quadros;
+    int falhasDePaginas;
+
+    public SubstituicaoPaginaFIFO(int paginas[], int tamanho, int quadros) {
+        this.paginas = paginas;
+        this.tamanho = tamanho;
+        this.quadros = quadros;
+    }
+
+    int pageFaults(int pages[], int n, int capacity)
     {
         // To represent set of current pages. We use
         // an unordered_set so that we quickly check
@@ -65,8 +77,12 @@ public class FifoPageReplacement {
                 }
             }
         }
-
+        this.falhasDePaginas = page_faults;
         return page_faults;
     }
 
+    @Override
+    public void run() {
+        System.out.println("Falhas de página utilizando substituição FIFO para " + quadros + " quadros:     " + pageFaults(paginas, tamanho, quadros));
+    }
 }

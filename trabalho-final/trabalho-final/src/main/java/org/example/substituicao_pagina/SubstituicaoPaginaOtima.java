@@ -1,6 +1,17 @@
-package org.example.page_replacement;
+package org.example.substituicao_pagina;
 
-public class OptimalPageReplacement {
+public class SubstituicaoPaginaOtima implements Runnable{
+
+    int paginas[];
+    int tamanho;
+    int quadros;
+
+    public SubstituicaoPaginaOtima(int[] paginas, int tamanho, int quadros) {
+        this.paginas = paginas;
+        this.tamanho = tamanho;
+        this.quadros = quadros;
+    }
+
     // Function to check whether a page exists
     // in a frame or not
     static boolean search(int key, int[] fr)
@@ -76,5 +87,10 @@ public class OptimalPageReplacement {
 //        System.out.println("No. of hits = " + hit);
 //        System.out.println("No. of misses = " + (pn - hit));
         return (pn - hit);
+    }
+
+    @Override
+    public void run() {
+        System.out.println("Falhas de página utilizando substituição Otima para " + quadros + " quadros:    " + pageFaults(paginas, tamanho, quadros));
     }
 }
