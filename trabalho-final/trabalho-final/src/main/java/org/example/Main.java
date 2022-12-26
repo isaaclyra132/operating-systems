@@ -12,17 +12,17 @@ public class Main {
 //      SUBSTITUICAO COM 3 QUADROS
         int quadros = 3;
         System.out.println("-------------------------------------------------------------------------------");
-        Thread threasFIFOSubstituicao3Quadros = new Thread(new SubstituicaoPaginaFIFO(paginas, paginas.length, quadros));
+        Thread threadFIFOSubstituicao3Quadros = new Thread(new SubstituicaoPaginaFIFO(paginas, paginas.length, quadros));
         Thread threadLRUSubstituicao3Quadros =  new Thread(new SubstituicaoPaginaLRU(paginas, paginas.length, quadros));
         Thread threadLRUOtima3Quadros =  new Thread(new SubstituicaoPaginaOtima(paginas, paginas.length, quadros));
 
-        threasFIFOSubstituicao3Quadros.start();
+        threadFIFOSubstituicao3Quadros.start();
         threadLRUSubstituicao3Quadros.start();
         threadLRUOtima3Quadros.start();
 
         // ESPERA AS THREADS TERMINAREM A TAREFA
         try {
-            threasFIFOSubstituicao3Quadros.join();
+            threadFIFOSubstituicao3Quadros.join();
             threadLRUSubstituicao3Quadros.join();
             threadLRUOtima3Quadros.join();
         } catch (InterruptedException error) {
@@ -33,17 +33,17 @@ public class Main {
 
 //      SUBSTITUICAO COM 4 QUADROS
         quadros = 4;
-        Thread threasFIFOSubstituicao4Quadros = new Thread(new SubstituicaoPaginaFIFO(paginas, paginas.length, quadros));
+        Thread threadFIFOSubstituicao4Quadros = new Thread(new SubstituicaoPaginaFIFO(paginas, paginas.length, quadros));
         Thread threadLRUSubstituicao4Quadros =  new Thread(new SubstituicaoPaginaLRU(paginas, paginas.length, quadros));
         Thread threadLRUOtima4Quadros =  new Thread(new SubstituicaoPaginaOtima(paginas, paginas.length, quadros));
 
-        threasFIFOSubstituicao4Quadros.start();
+        threadFIFOSubstituicao4Quadros.start();
         threadLRUSubstituicao4Quadros.start();
         threadLRUOtima4Quadros.start();
 
         // ESPERA AS THREADS TERMINAREM A TAREFA
         try {
-            threasFIFOSubstituicao4Quadros.join();
+            threadFIFOSubstituicao4Quadros.join();
             threadLRUSubstituicao4Quadros.join();
             threadLRUOtima4Quadros.join();
         } catch (InterruptedException error) {
@@ -53,17 +53,17 @@ public class Main {
 
 //      SUBSTITUICAO COM 5 QUADROS
         quadros = 5;
-        Thread threasFIFOSubstituicao5Quadros = new Thread(new SubstituicaoPaginaFIFO(paginas, paginas.length, quadros));
+        Thread threadFIFOSubstituicao5Quadros = new Thread(new SubstituicaoPaginaFIFO(paginas, paginas.length, quadros));
         Thread threadLRUSubstituicao5Quadros =  new Thread(new SubstituicaoPaginaLRU(paginas, paginas.length, quadros));
         Thread threadLRUOtima5Quadros =  new Thread(new SubstituicaoPaginaOtima(paginas, paginas.length, quadros));
 
-        threasFIFOSubstituicao5Quadros.start();
+        threadFIFOSubstituicao5Quadros.start();
         threadLRUSubstituicao5Quadros.start();
         threadLRUOtima5Quadros.start();
 
         // ESPERA AS THREADS TERMINAREM A TAREFA
         try {
-            threasFIFOSubstituicao5Quadros.join();
+            threadFIFOSubstituicao5Quadros.join();
             threadLRUSubstituicao5Quadros.join();
             threadLRUOtima5Quadros.join();
         } catch (InterruptedException error) {
@@ -73,17 +73,17 @@ public class Main {
 
 //      SUBSTITUICAO COM 6 QUADROS
         quadros = 6;
-        Thread threasFIFOSubstituicao6Quadros = new Thread(new SubstituicaoPaginaFIFO(paginas, paginas.length, quadros));
+        Thread threadFIFOSubstituicao6Quadros = new Thread(new SubstituicaoPaginaFIFO(paginas, paginas.length, quadros));
         Thread threadLRUSubstituicao6Quadros =  new Thread(new SubstituicaoPaginaLRU(paginas, paginas.length, quadros));
         Thread threadLRUOtima6Quadros =  new Thread(new SubstituicaoPaginaOtima(paginas, paginas.length, quadros));
 
-        threasFIFOSubstituicao6Quadros.start();
+        threadFIFOSubstituicao6Quadros.start();
         threadLRUSubstituicao6Quadros.start();
         threadLRUOtima6Quadros.start();
 
         // ESPERA AS THREADS TERMINAREM A TAREFA
         try {
-            threasFIFOSubstituicao6Quadros.join();
+            threadFIFOSubstituicao6Quadros.join();
             threadLRUSubstituicao6Quadros.join();
             threadLRUOtima6Quadros.join();
         } catch (InterruptedException error) {
@@ -93,17 +93,17 @@ public class Main {
 
 //      SUBSTITUICAO COM 7 QUADROS
         quadros = 7;
-        Thread threasFIFOSubstituicao7Quadros = new Thread(new SubstituicaoPaginaFIFO(paginas, paginas.length, quadros));
+        Thread threadFIFOSubstituicao7Quadros = new Thread(new SubstituicaoPaginaFIFO(paginas, paginas.length, quadros));
         Thread threadLRUSubstituicao7Quadros =  new Thread(new SubstituicaoPaginaLRU(paginas, paginas.length, quadros));
         Thread threadLRUOtima7Quadros =  new Thread(new SubstituicaoPaginaOtima(paginas, paginas.length, quadros));
 
-        threasFIFOSubstituicao7Quadros.start();
+        threadFIFOSubstituicao7Quadros.start();
         threadLRUSubstituicao7Quadros.start();
         threadLRUOtima7Quadros.start();
 
         // ESPERA AS THREADS TERMINAREM A TAREFA
         try {
-            threasFIFOSubstituicao7Quadros.join();
+            threadFIFOSubstituicao7Quadros.join();
             threadLRUSubstituicao7Quadros.join();
             threadLRUOtima7Quadros.join();
         } catch (InterruptedException error) {
