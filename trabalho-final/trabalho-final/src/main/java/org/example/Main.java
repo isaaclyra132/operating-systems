@@ -5,16 +5,13 @@ import org.example.substituicao_pagina.SubstituicaoPaginaLRU;
 import org.example.substituicao_pagina.SubstituicaoPaginaOtima;
 
 public class Main {
-
-
     public static void main(String[] args) throws InterruptedException {
         int paginas[] = {1, 2, 3, 4, 2, 1, 5, 6, 2, 1, 2, 3, 7, 6, 3, 2, 1, 2, 6};
-
-        System.out.println("-------------------------------------------------------------------------------");
 
 
 //      SUBSTITUICAO COM 3 QUADROS
         int quadros = 3;
+        System.out.println("-------------------------------------------------------------------------------");
         Thread threasFIFOSubstituicao3Quadros = new Thread(new SubstituicaoPaginaFIFO(paginas, paginas.length, quadros));
         Thread threadLRUSubstituicao3Quadros =  new Thread(new SubstituicaoPaginaLRU(paginas, paginas.length, quadros));
         Thread threadLRUOtima3Quadros =  new Thread(new SubstituicaoPaginaOtima(paginas, paginas.length, quadros));
@@ -23,6 +20,7 @@ public class Main {
         threadLRUSubstituicao3Quadros.start();
         threadLRUOtima3Quadros.start();
 
+        // ESPERA AS THREADS TERMINAREM A TAREFA
         try {
             threasFIFOSubstituicao3Quadros.join();
             threadLRUSubstituicao3Quadros.join();
@@ -43,6 +41,7 @@ public class Main {
         threadLRUSubstituicao4Quadros.start();
         threadLRUOtima4Quadros.start();
 
+        // ESPERA AS THREADS TERMINAREM A TAREFA
         try {
             threasFIFOSubstituicao4Quadros.join();
             threadLRUSubstituicao4Quadros.join();
@@ -62,6 +61,7 @@ public class Main {
         threadLRUSubstituicao5Quadros.start();
         threadLRUOtima5Quadros.start();
 
+        // ESPERA AS THREADS TERMINAREM A TAREFA
         try {
             threasFIFOSubstituicao5Quadros.join();
             threadLRUSubstituicao5Quadros.join();
@@ -81,6 +81,7 @@ public class Main {
         threadLRUSubstituicao6Quadros.start();
         threadLRUOtima6Quadros.start();
 
+        // ESPERA AS THREADS TERMINAREM A TAREFA
         try {
             threasFIFOSubstituicao6Quadros.join();
             threadLRUSubstituicao6Quadros.join();
@@ -100,6 +101,7 @@ public class Main {
         threadLRUSubstituicao7Quadros.start();
         threadLRUOtima7Quadros.start();
 
+        // ESPERA AS THREADS TERMINAREM A TAREFA
         try {
             threasFIFOSubstituicao7Quadros.join();
             threadLRUSubstituicao7Quadros.join();

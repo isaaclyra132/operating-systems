@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class SubstituicaoPaginaFIFO implements Runnable{
+public class SubstituicaoPaginaFIFO implements Runnable {
 
     int paginas[];
     int tamanho;
@@ -17,72 +17,71 @@ public class SubstituicaoPaginaFIFO implements Runnable{
         this.quadros = quadros;
     }
 
-    int pageFaults(int pages[], int n, int capacity)
+    void pageFaults()
     {
-        // To represent set of current pages. We use
-        // an unordered_set so that we quickly check
-        // if a page is present in set or not
-        HashSet<Integer> s = new HashSet<>(capacity);
+        // Para representar o conjunto de páginas atuais. Nós usamos
+        // um set não ordenado para que possamos verificar rapidamente
+        // se uma página está presente no conjunto ou não
+        HashSet<Integer> s = new HashSet<>(quadros);
 
-        // To store the pages in FIFO manner
+        // Para armazenar as páginas numa fila (FIFO)
         Queue<Integer> indexes = new LinkedList<>() ;
 
-        // Start from initial page
-        int page_faults = 0;
-        for (int i=0; i<n; i++)
+        // Comece da página inicial
+        falhasDePaginas = 0;
+        for (int i=0; i<tamanho; i++)
         {
-            // Check if the set can hold more pages
-            if (s.size() < capacity)
+            // Verifica se o conjunto pode conter mais páginas
+            if (s.size() < quadros)
             {
-                // Insert it into set if not present
-                // already which represents page fault
-                if (!s.contains(pages[i]))
+                // Insere-o no conjunto se não estiver presente
+                // já que representa falha de página
+                if (!s.contains(paginas[i]))
                 {
-                    s.add(pages[i]);
+                    s.add(paginas[i]);
 
-                    // increment page fault
-                    page_faults++;
+                    // incrementa falha de página
+                    falhasDePaginas++;
 
-                    // Push the current page into the queue
-                    indexes.add(pages[i]);
+                    // Coloca a página atual na fila
+                    indexes.add(paginas[i]);
                 }
             }
 
-            // If the set is full then need to perform FIFO
-            // i.e. remove the first page of the queue from
-            // set and queue both and insert the current page
+            // Se o conjunto estiver cheio então precisa executar FIFO
+            // ou seja, remove a primeira página da fila de
+            // define e enfileira ambos e insere a página atual
             else
             {
-                // Check if current page is not already
-                // present in the set
-                if (!s.contains(pages[i]))
+                // Verifica se a página atual ainda não está
+                // presente no conjunto
+                if (!s.contains(paginas[i]))
                 {
-                    //Pop the first page from the queue
+                    //Abre a primeira página da fila
                     int val = indexes.peek();
 
                     indexes.poll();
 
-                    // Remove the indexes page
+                    // Remove a página de índices
                     s.remove(val);
 
-                    // insert the current page
-                    s.add(pages[i]);
+                    // insere a página atual
+                    s.add(paginas[i]);
 
-                    // push the current page into
-                    // the queue
-                    indexes.add(pages[i]);
+                    // empurra a página atual para dentro
+                    // a fila
+                    indexes.add(paginas[i]);
 
-                    // Increment page faults
-                    page_faults++;
+                    // Incrementa as falhas da página
+                    falhasDePaginas++;
                 }
             }
         }
-        this.falhasDePaginas = page_faults;
-        return page_faults;
     }
 
     @Override
     public void run() {
-        System.out.println("Falhas de página utilizando substituição FIFO para " + quadros + " quadros:     " + pageFaults(paginas, tamanho, quadros));
+        pageFaults();
+        System.out.println("| " + quadros + " QUADROS | SUBSTITUICAO FIFO   | FALHAS DE PÁGINA: " + falhasDePaginas + " |");
     }
 }

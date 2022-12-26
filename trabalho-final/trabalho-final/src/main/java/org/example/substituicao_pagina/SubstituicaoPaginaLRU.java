@@ -8,8 +8,9 @@ public class SubstituicaoPaginaLRU implements Runnable{
 
     int paginas[];
     int tamanho;
-
     int quadros;
+    int falhasDePaginas;
+
 
     public SubstituicaoPaginaLRU(int paginas[], int tamanho, int quadros) {
         this.paginas = paginas;
@@ -17,50 +18,50 @@ public class SubstituicaoPaginaLRU implements Runnable{
         this.quadros = quadros;
     }
 
-    public static int pageFaults(int pages[], int n, int capacity)
+    void pageFaults()
     {
-        // To represent set of current pages. We use
-        // an unordered_set so that we quickly check
-        // if a page is present in set or not
-        HashSet<Integer> s = new HashSet<>(capacity);
+        // Para representar o conjunto de páginas atuais. Nós usamos
+        // um set não ordenado para que possamos verificar rapidamente
+        // se uma página está presente no conjunto ou não
+        HashSet<Integer> s = new HashSet<>(quadros);
 
-        // To store least recently used indexes
-        // of pages.
+        // Para armazenar índices menos usados recentemente
+        // de páginas.
         HashMap<Integer, Integer> indexes = new HashMap<>();
 
-        // Start from initial page
-        int page_faults = 0;
-        for (int i=0; i<n; i++)
+        // Começa da página inicial
+        falhasDePaginas = 0;
+        for (int i=0; i<tamanho; i++)
         {
-            // Check if the set can hold more pages
-            if (s.size() < capacity)
+            // Verifica se o conjunto pode conter mais páginas
+            if (s.size() < quadros)
             {
-                // Insert it into set if not present
-                // already which represents page fault
-                if (!s.contains(pages[i]))
+                // Insere-o no conjunto se não estiver presente
+                // já que representa falta de página
+                if (!s.contains(paginas[i]))
                 {
-                    s.add(pages[i]);
+                    s.add(paginas[i]);
 
-                    // increment page fault
-                    page_faults++;
+                    // incrementa falha de página
+                    falhasDePaginas++;
                 }
 
-                // Store the recently used index of
-                // each page
-                indexes.put(pages[i], i);
+                // Armazena o índice usado recentemente de
+                // cada página
+                indexes.put(paginas[i], i);
             }
 
-            // If the set is full then need to perform lru
-            // i.e. remove the least recently used page
-            // and insert the current page
+            // Se o conjunto estiver cheio, será necessário executar lru
+            // ou seja, remove a página menos usada recentemente
+            // e insere a página atual
             else
             {
-                // Check if current page is not already
-                // present in the set
-                if (!s.contains(pages[i]))
+                // Verifica se a página atual ainda não está
+                // presente no conjunto
+                if (!s.contains(paginas[i]))
                 {
-                    // Find the least recently used pages
-                    // that is present in the set
+                    // Encontra as páginas usadas menos recentemente
+                    // que está presente no conjunto
                     int lru = Integer.MAX_VALUE, val=Integer.MIN_VALUE;
 
                     Iterator<Integer> itr = s.iterator();
@@ -74,27 +75,26 @@ public class SubstituicaoPaginaLRU implements Runnable{
                         }
                     }
 
-                    // Remove the indexes page
+                    // Remove a página de índices
                     s.remove(val);
-                    //remove lru from hashmap
+                    //remove lru do hashmap
                     indexes.remove(val);
-                    // insert the current page
-                    s.add(pages[i]);
+                    // insere a página atual
+                    s.add(paginas[i]);
 
-                    // Increment page faults
-                    page_faults++;
+                    // Incrementa as falhas da página
+                    falhasDePaginas++;
                 }
 
-                // Update the current page index
-                indexes.put(pages[i], i);
+                // Atualiza o índice da página atual
+                indexes.put(paginas[i], i);
             }
         }
-
-        return page_faults;
     }
 
     @Override
     public void run() {
-        System.out.println("Falhas de página utilizando substituição LRU para " + quadros + " quadros:      " + pageFaults(paginas, tamanho, quadros));
+        pageFaults();
+        System.out.println("| " + quadros + " QUADROS | SUBSTITUICAO LRU    | FALHAS DE PÁGINA: " + falhasDePaginas + " |");
     }
 }
